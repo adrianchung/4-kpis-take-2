@@ -1,17 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProjectsService } from './projects.service';
-import { JiraService } from '../jira/jira.service';
+import { JiraService } from './jira.service';
 import { ConfigService } from '../config/config.service';
 
-describe('ProjectsService', () => {
-  let service: ProjectsService;
+describe('JiraService', () => {
+  let service: JiraService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ConfigService, JiraService, ProjectsService],
+      providers: [ConfigService, JiraService],
     }).compile();
 
-    service = module.get<ProjectsService>(ProjectsService);
+    service = module.get<JiraService>(JiraService);
   });
 
   it('should be defined', () => {

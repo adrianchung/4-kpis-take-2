@@ -1,7 +1,5 @@
+import { Release } from './release.interface';
 export interface Project {
   key: string;
-  leadTime: number;
-  deploymentFrequency: number;
-  deploymentFailureRate: number;
-  meanTimeToRestore: number;
+  releases: Release[];
 }
