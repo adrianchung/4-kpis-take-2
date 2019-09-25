@@ -75,6 +75,14 @@ $ docker-compose up
 $ curl "http://localhost:3000/projects/MYKEY/stats?endDate=2019-12-31&startDate=2019-07-01"
 ```
 
+## Development
+I find it easiest to have 2 terminal windows open to see the results of your web application, along with tests running continuously to make sure you didn't break anything.
+
+```bash
+$ npm run start:dev
+$ npm run test:watch
+```
+
 ## License
 
 This project is MIT licensed.
