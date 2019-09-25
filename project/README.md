@@ -60,6 +60,13 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Running with Docker
+```bash
+$ docker-compose build
+$ docker-compose up
+$ curl "http://localhost:3000/projects/MYKEY/stats?endDate=2019-12-31&startDate=2019-07-01"
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
