@@ -12,6 +12,12 @@ This project aims to automate the calculation of lead time and deployment freque
 
 Yes, there are many assumptions of the JIRA workflow, but in the absence of instrumenting these in the actual deployment pipeline of each team, this is the next best thing. Ideally we actually track these metrics by tracking code commits into version control and tagging/relating them to production deployments, as that truly measures when value is realized to the end customer. 
 
+## Technologies / Main Libraries
+* [nestjs](https://nestjs.com/): Used as a lightweight Node.js framework to serve up an API for pulling stats
+* [JavaScript JIRA API for node.js](https://github.com/jira-node/node-jira-client): I need a JIRA client to access the API. Unfortunately this library uses basic auth as a V1 implementation and will need to migrate away from that once it's deprecated
+* [jest](https://jestjs.io/): JavaScript testing framework
+* [TypeScript starter repository](https://github.com/nestjs/typescript-starter): Used as a way to bootstrap my nestjs project
+
 ## Installation
 
 ```bash
