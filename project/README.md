@@ -1,32 +1,16 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
-
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# 4 KPIs Take Two
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The book [Accelerate](https://www.amazon.com/Accelerate-Software-Performing-Technology-Organizations/dp/1942788339) by Nicole Forsgren PhD, Jez Humble and Gene Kim talks about 4 KPIs of high performing teams. These KPIs are:
+* Lead time: The time from code commit to production
+* Deployment frequency: The number of times deployed to production per day
+* Deployment failure rate: The percentage of time a deployment to production results in requiring remediation, whether it's a rollback, fix forward, patch release, etc.
+* Mean time to restore: The amount of time it takes a failed deployment or failure in production to be resolved
+
+This project aims to automate the calculation of lead time and deployment frequency using the JIRA Server API. It is highly dependent on the team's ability to manage code deployments using JIRA releases, and to consistently move cards to a 'Done' or a 'Closed' state upon completion. If cards are marked as 'Done' or 'Closed' *after* a release is marked complete, it will not be counted, as that would result in a negative lead time, which is impossible. 
+
+Yes, there are many assumptions of the JIRA workflow, but in the absence of instrumenting these in the actual deployment pipeline of each team, this is the next best thing. Ideally we actually track these metrics by tracking code commits into version control and tagging/relating them to production deployments, as that truly measures when value is realized to the end customer. 
 
 ## Installation
 
@@ -34,7 +18,28 @@
 $ npm install
 ```
 
-## Running the app
+## Setup
+
+This project uses [dotenv](https://github.com/motdotla/dotenv#readme) to manage environment configuration. Create these files on your local system and fill in fields as appropriate.
+
+```
+# development.env
+JIRA_HOST = <wheremyjirais.com>
+JIRA_USERNAME = <myuser>
+JIRA_USER_PASSWORD = <mypassword>
+
+# test.env
+JIRA_HOST = <wheremyjirais.com>
+JIRA_USERNAME = <myuser>
+JIRA_USER_PASSWORD = <mypassword>
+
+# production.env
+JIRA_HOST = <wheremyjirais.com>
+JIRA_USERNAME = <myuser>
+JIRA_USER_PASSWORD = <mypassword>
+```
+
+## Running the app (local)
 
 ```bash
 # development
@@ -45,6 +50,9 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# test it out
+$ curl "http://localhost:3000/projects/MYKEY/stats?endDate=2019-12-31&startDate=2019-07-01"
 ```
 
 ## Test
@@ -67,16 +75,6 @@ $ docker-compose up
 $ curl "http://localhost:3000/projects/MYKEY/stats?endDate=2019-12-31&startDate=2019-07-01"
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
 ## License
 
-  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is MIT licensed.
